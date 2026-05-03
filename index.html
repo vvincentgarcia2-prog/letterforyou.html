@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message for Dani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-red: #450a0a;
+            --velvet: #7f1d1d;
+            --blood: #991b1b;
+            --gold: #fbbf24;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+            font-family: 'Inter', sans-serif;
+            color: #fee2e2;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Envelope Interaction */
+        .envelope-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: var(--dark-red);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.😎, inset 0 0 40px rgba(0,0,0,0.5);
+            border-radius: 4px;
+        }
+
+        .envelope.open {
+            transform: rotateX(20deg) translateY(200px) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 120px solid #5a0c0c;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+
+        .envelope:hover .flap {
+            transform: rotateX(160deg);
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: #991b1b;
+            border-radius: 50%;
+            z-index: 4;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fbbf24;
+            font-size: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .heart-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            animation: rise 8s ease-in infinite;
+            color: #dc2626;
+            filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.5));
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) translateX(50px) scale(1.2); opacity: 0; }
+        }
+
+        #main-content {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s ease-out;
+            display: none;
+        }
+
+        #main-content.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-paper {
+            background: #fffdfa;
+            color: #1a0505;
+            box-shadow: 0 0 60px rgba(0,0,0,0.6), 15px 15px 0px rgba(127, 29, 29, 0.2);
+            border-radius: 2px;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight-red {
+            color: #991b1b;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+
+    <div id="heart-bg"></div>
+
+    <div id="intro-stage" class="text-center z-10">
+        <h2 class="serif text-2xl mb-12 text-red-500 tracking-widest uppercase animate-pulse">For Dani</h2>
+        
+        <div class="envelope-container mx-auto" onclick="openLetter()">
+            <div id="envelope" class="envelope">
+                <div class="flap"></div>
+                <div class="wax-seal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                </div>
+                <div class="absolute bottom-6 w-full text-center">
+                    <p class="text-[10px] tracking-[0.4em] text-red-900/60 font-bold uppercase">Break the seal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" class="max-w-2xl w-full z-10 py-12">
+        <div class="letter-paper p-8 md:p-16 rounded-sm relative overflow-hidden">
+            
+            <div class="space-y-8">
+                <header class="border-b border-red-100 pb-6">
+                    <h1 class="serif text-3xl md:text-4xl text-red-900">dani,</h1>
+                </header>
+
+                <div class="serif text-lg md:text-xl leading-relaxed space-y-6 text-gray-900">
+                    <p class="scroll-reveal">
+                        I know our "date" didn't go as planned, and I want to try again. I want to do it right this time. So no matter what bad thing is going to happen, <span class="highlight-red">I'll make it happen.</span>
+                    </p>
+                    
+                    <p class="scroll-reveal">
+                        We'll call at <span class="italic font-semibold">9:30 am</span> to give you time to prepare and take good care of Adi. What if Lumagpas? It's okay; we'll still make it happen. 
+                    </p>
+
+                    <p class="scroll-reveal">
+                        I really like talking to you, so before we engage in activities, I'd prefer to have a short conversation with you for at least an hour. After that, we'll play games; there's <span class="italic underline decoration-red-200">Roblox</span> and <span class="italic underline decoration-red-200">codm</span>. 
+                    </p>
+
+                    <p class="scroll-reveal">
+                        I know you'd want to play codm, so we'll go for that. After that we'll play Roblox; there are many games I can play with you Dun, but at the top of the list is <span class="highlight-red">Moa Seaside</span>. 
+                    </p>
+
+                    <p class="scroll-reveal">
+                        We may be apart, but I know we'll make it special; <span class="highlight-red">every moment with you is special.</span>
+                    </p>
+
+                    <div class="scroll-reveal text-center py-8 border-y border-red-50 my-8">
+                        <p class="text-2xl md:text-3xl font-bold text-red-900 italic leading-tight">
+                            Now, Rupert Daniel Amon, will you go on another date with me? 
+                        </p>
+                        <p class="text-xs text-gray-400 mt-4 tracking-widest uppercase">It sounds formal, but it just feels right.</p>
+                    </div>
+                </div>
+
+                <footer class="mt-12 pt-8 border-t border-red-50">
+                    <p class="cursive text-4xl text-red-700">sincerely yours,</p>
+                    <p class="serif text-2xl mt-2 font-bold tracking-tight text-red-950 uppercase">vincent</p>
+                </footer>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center opacity-40 text-xs tracking-[0.4em] text-red-200">
+            SCROLL TO READ FULL LETTER
+            <div class="mt-4 animate-bounce text-lg">↓</div>
+        </div>
+    </main>
+
+    <script>
+        function createHearts() {
+            const container = document.getElementById('heart-bg');
+            const heartIcons = ['❤', '♥', '🌹'];
+            
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 5 + 7) + 's';
+                heart.style.animationDelay = (Math.random() * 10) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                container.appendChild(heart);
+            }
+        }
+
+        function openLetter() {
+            const envelope = document.getElementById('envelope');
+            const intro = document.getElementById('intro-stage');
+            const main = document.getElementById('main-content');
+
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                intro.style.transition = 'opacity 0.5s ease';
+                intro.style.opacity = '0';
+                setTimeout(() => {
+                    intro.style.display = 'none';
+                    main.classList.add('visible');
+                    handleScroll();
+                }, 500);
+            }, 800);
+        }
+
+        function handleScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            reveals.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.95) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.onload = createHearts;
+    </script>
+</body>
+</html>
